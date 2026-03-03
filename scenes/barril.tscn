@@ -1,0 +1,74 @@
+[gd_scene load_steps=13 format=3 uid="uid://bxcg3hd4miecb"]
+
+[ext_resource type="Script" path="res://scripts/barril.gd" id="1_vrq1j"]
+[ext_resource type="Texture2D" uid="uid://cyb7i3eo8cwap" path="res://assets/objects/barril.png" id="2_nh1li"]
+[ext_resource type="Texture2D" uid="uid://bnif34wnrd442" path="res://assets/sprites/barril/explosion8.png" id="3_5tx6o"]
+[ext_resource type="Texture2D" uid="uid://bhyb6142sigg5" path="res://assets/sprites/barril/explosion1.png" id="4_25noo"]
+[ext_resource type="Texture2D" uid="uid://dypwvje722frb" path="res://assets/sprites/barril/explosion2.png" id="5_pq54p"]
+[ext_resource type="Texture2D" uid="uid://utr36dlfu2uy" path="res://assets/sprites/barril/explosion3.png" id="6_wcruh"]
+[ext_resource type="Texture2D" uid="uid://cfk7sg7v50d53" path="res://assets/sprites/barril/explosion4.png" id="7_x3qkp"]
+[ext_resource type="Texture2D" uid="uid://uvpltwauqts6" path="res://assets/sprites/barril/explosion5.png" id="8_paxuy"]
+[ext_resource type="Texture2D" uid="uid://303ucnonc6yv" path="res://assets/sprites/barril/explosion6.png" id="9_155a6"]
+[ext_resource type="Texture2D" uid="uid://dwy6v58rbuhis" path="res://assets/sprites/barril/explosion7.png" id="10_8clpm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c5jk7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nh1li")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5tx6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_25noo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pq54p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wcruh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_x3qkp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_paxuy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_155a6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8clpm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5tx6o")
+}],
+"loop": false,
+"name": &"destruction",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ck336"]
+size = Vector2(30, 27)
+
+[node name="Barril" type="Area2D" groups=["Barrels", "Players"]]
+collision_layer = 6
+collision_mask = 6
+script = ExtResource("1_vrq1j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_c5jk7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 6
+visibility_layer = 6
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_ck336")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://cyus27yk7g0j3"]
+
+[ext_resource type="Script" path="res://scripts/single_use_platform.gd" id="1_nn1wx"]
+[ext_resource type="Texture2D" uid="uid://03rr8111g5pt" path="res://assets/Terrain/city-1-united-2.png" id="2_pgb52"]
+[ext_resource type="Texture2D" uid="uid://dnkssvbdy6gxp" path="res://assets/Terrain/yanis_le_baka-imageonline.co-merged.png" id="3_yev5w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8sg8k"]
+size = Vector2(48, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2dncc"]
+size = Vector2(48, 1.75)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xbojl"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1kwc4"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 60.0
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+angular_velocity_min = 75.0
+angular_velocity_max = 75.0
+gravity = Vector3(0, 500, 0)
+scale_min = 0.2
+scale_max = 0.5
+anim_offset_max = 1.0
+
+[node name="single_use_platform" type="StaticBody2D" groups=["Plateformes", "Players"]]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_nn1wx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 6
+visibility_layer = 6
+position = Vector2(4, 9.5)
+shape = SubResource("RectangleShape2D_8sg8k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, 9)
+scale = Vector2(0.599107, 0.599107)
+texture = ExtResource("2_pgb52")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 6
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+light_mask = 6
+visibility_layer = 6
+position = Vector2(4, -2)
+shape = SubResource("RectangleShape2D_2dncc")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_xbojl")
+emitting = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_1kwc4")
+texture = ExtResource("3_yev5w")
+one_shot = true
+explosiveness = 1.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

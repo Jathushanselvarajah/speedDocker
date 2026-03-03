@@ -1,0 +1,57 @@
+[gd_scene load_steps=11 format=3 uid="uid://dvhq7mxe0ja21"]
+
+[ext_resource type="Script" path="res://scripts/boost.gd" id="1_d5nfq"]
+[ext_resource type="Texture2D" uid="uid://dmq3yo7glgmh5" path="res://assets/objects/pixil-frame-0.png" id="2_po8rw"]
+[ext_resource type="Texture2D" uid="uid://ce3qlvq65830m" path="res://assets/objects/pixil-frame-1.png" id="3_7xf3h"]
+[ext_resource type="Texture2D" uid="uid://dbidg06ludhsi" path="res://assets/objects/pixil-frame-2.png" id="4_3sbw8"]
+[ext_resource type="Texture2D" uid="uid://bwayydfwp4rxr" path="res://assets/objects/pixil-frame-3.png" id="5_2i6ga"]
+[ext_resource type="Texture2D" uid="uid://b0o88qerk76or" path="res://assets/objects/pixil-frame-4.png" id="6_t1q2l"]
+[ext_resource type="Texture2D" uid="uid://jot3kb7rmjxi" path="res://assets/objects/pixil-frame-5.png" id="7_vmfua"]
+[ext_resource type="Texture2D" uid="uid://buqi0asd2nd3m" path="res://assets/objects/pixil-frame-6.png" id="8_uau2s"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_71x7t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_po8rw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7xf3h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3sbw8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2i6ga")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_t1q2l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vmfua")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_uau2s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5f6nj"]
+size = Vector2(32, 32)
+
+[node name="Boost" type="Area2D" groups=["Boosts", "Players"]]
+collision_layer = 6
+collision_mask = 6
+script = ExtResource("1_d5nfq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_71x7t")
+autoplay = "default"
+frame_progress = 0.373102
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5f6nj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

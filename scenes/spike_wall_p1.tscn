@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://4uxclc0pykel"]
+
+[ext_resource type="Script" path="res://scripts/spike_wall_p1.gd" id="1_iwygl"]
+[ext_resource type="Texture2D" uid="uid://jqj4twdaiy5o" path="res://assets/objects/piques.png" id="2_o278w"]
+[ext_resource type="Texture2D" uid="uid://d2pc7aui5e8h4" path="res://assets/background/pixil-frame-02.png" id="3_qyg73"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nt8oe"]
+size = Vector2(20, 62.2536)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4g204"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_o278w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q3tqk"]
+texture = ExtResource("3_qyg73")
+
+[node name="SpikeWall" type="Area2D"]
+z_index = 4096
+scale = Vector2(2.61532, 2.61532)
+collision_layer = 6
+collision_mask = 6
+script = ExtResource("1_iwygl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-11, 45)
+scale = Vector2(0.532254, 1.95973)
+shape = SubResource("RectangleShape2D_nt8oe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_4g204")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
+position = Vector2(29, -1.26763e-06)
+sprite_frames = SubResource("SpriteFrames_4g204")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
+position = Vector2(58.8838, 0)
+sprite_frames = SubResource("SpriteFrames_4g204")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D/AnimatedSprite2D2"]
+position = Vector2(29, -1.26763e-06)
+sprite_frames = SubResource("SpriteFrames_4g204")
+
+[node name="Timer" type="Node2D" parent="."]
+
+[node name="StartTimer" type="Timer" parent="Timer"]
+wait_time = 5.0
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -194.24
+offset_top = -16.4416
+offset_right = -16.2401
+offset_bottom = 104.558
+theme_override_styles/panel = SubResource("StyleBoxTexture_q3tqk")

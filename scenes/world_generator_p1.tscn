@@ -1,0 +1,15 @@
+[gd_scene load_steps=9 format=3 uid="uid://b413cepu1te4w"]
+
+[ext_resource type="Script" path="res://scripts/world_generator.gd" id="1_3viyb"]
+[ext_resource type="PackedScene" uid="uid://cu0irkpsqvn3v" path="res://scenes/sections1/Section1.1.tscn" id="2_4p1c8"]
+[ext_resource type="PackedScene" uid="uid://h2vwvlpurfjp" path="res://scenes/sections1/Section3.1.tscn" id="3_xli6r"]
+[ext_resource type="PackedScene" uid="uid://dw6gc6rm8eqja" path="res://scenes/sections1/Section4.1.tscn" id="4_2dfsr"]
+[ext_resource type="PackedScene" uid="uid://qqb6aymydk2s" path="res://scenes/sections1/Section2.1.tscn" id="5_oky62"]
+[ext_resource type="PackedScene" uid="uid://b5ulpvfhj5e3s" path="res://scenes/sections1/Section5.1.tscn" id="6_eoauc"]
+[ext_resource type="PackedScene" uid="uid://b506ia4k4ii8e" path="res://scenes/sections1/Section6.1.tscn" id="7_llfap"]
+[ext_resource type="PackedScene" uid="uid://d31c0dxmjbnuo" path="res://scenes/sections1/Section7.1.tscn" id="8_g3q30"]
+
+[node name="WorldGenerator" type="Node2D"]
+script = ExtResource("1_3viyb")
+sections_pool = Array[PackedScene]([ExtResource("2_4p1c8"), ExtResource("3_xli6r"), ExtResource("4_2dfsr")])
+special_scenes = Array[PackedScene]([ExtResource("5_oky62"), ExtResource("6_eoauc"), ExtResource("7_llfap"), ExtResource("8_g3q30")])

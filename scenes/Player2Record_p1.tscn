@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqiibld8ncksx"]
+
+[ext_resource type="VideoStream" path="res://assets/cutscenes/new_record_solo.ogv" id="1_gpqwf"]
+[ext_resource type="Script" path="res://scripts/video_stream_player.gd" id="2_b5sh1"]
+[ext_resource type="AudioStream" uid="uid://daghxfp4o3iks" path="res://assets/music/victory.ogg" id="3_nbwsn"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_right = 1920.0
+offset_bottom = 1088.0
+stream = ExtResource("1_gpqwf")
+autoplay = true
+expand = true
+script = ExtResource("2_b5sh1")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="VideoStreamPlayer"]
+stream = ExtResource("3_nbwsn")
+volume_db = -4.0
+autoplay = true
+
+[connection signal="finished" from="VideoStreamPlayer" to="VideoStreamPlayer" method="_on_finished"]

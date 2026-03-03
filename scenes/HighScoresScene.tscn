@@ -1,0 +1,118 @@
+[gd_scene load_steps=19 format=3 uid="uid://dalpc53sf161i"]
+
+[ext_resource type="Script" path="res://scripts/HighScoresScene.gd" id="1_s22f3"]
+[ext_resource type="Texture2D" uid="uid://d31qvh5v0ceb1" path="res://assets/background/MaquetteHighscoreAFK-BOUTON_VIDE.png" id="2_7rg53"]
+[ext_resource type="Texture2D" uid="uid://b0xxobsl7uo8w" path="res://assets/button/home_jaune.png" id="4_apvcn"]
+[ext_resource type="AudioStream" uid="uid://cjaoomhllt1ik" path="res://assets/music/musique_menu.ogg" id="5_1tegu"]
+[ext_resource type="Texture2D" uid="uid://dt0rbspvf1v80" path="res://assets/button/home_rouge.png" id="5_ktld8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bocy8"]
+texture = ExtResource("2_7rg53")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ew36a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b5dhu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r585n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4dn25"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o4nod"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ai36g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6lbck"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ypye"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vafgv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q8226"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gupix"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bknue"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_apvcn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ktld8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_s22f3")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1919.0
+offset_bottom = 1084.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_bocy8")
+
+[node name="BestScoreLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+offset_left = 1131.0
+offset_top = 273.0
+offset_right = 1683.0
+offset_bottom = 382.0
+theme_override_font_sizes/normal_font_size = 75
+text_direction = 3
+
+[node name="TopScoresLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+offset_left = 1132.0
+offset_top = 406.0
+offset_right = 1683.0
+offset_bottom = 986.0
+theme_override_font_sizes/normal_font_size = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 1104.0
+offset_top = 280.0
+offset_right = 1721.0
+offset_bottom = 374.0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 303.0
+offset_top = 879.0
+offset_right = 659.0
+offset_bottom = 976.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ew36a")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_b5dhu")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r585n")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_4dn25")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_o4nod")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_ai36g")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6lbck")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_1ypye")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vafgv")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_q8226")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gupix")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Button"]
+position = Vector2(176, 49)
+scale = Vector2(1.04062, 1.04062)
+sprite_frames = SubResource("SpriteFrames_bknue")
+autoplay = "default"
+frame_progress = 0.0676509
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_1tegu")
+volume_db = -4.0
+autoplay = true
+max_distance = 9.22337e+18
+parameters/looping = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

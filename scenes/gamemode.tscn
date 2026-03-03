@@ -1,0 +1,167 @@
+[gd_scene load_steps=33 format=3 uid="uid://b82nt64s0hp5j"]
+
+[ext_resource type="Texture2D" uid="uid://bs1fgior3tt64" path="res://assets/background/Maquette_Choix_Nb_Joueurs.png" id="1_f6r3o"]
+[ext_resource type="Script" path="res://scripts/gamemode.gd" id="1_ul6en"]
+[ext_resource type="Texture2D" uid="uid://di8i60mii7kax" path="res://assets/button/pixil-frame-0_2.png" id="2_f1u2i"]
+[ext_resource type="Texture2D" uid="uid://bt81a5i1av4jt" path="res://assets/button/pixil-frame-0_3.png" id="3_mowbs"]
+[ext_resource type="Texture2D" uid="uid://c6chcfq42w1yk" path="res://assets/button/pixil-frame-0_4.png" id="4_wjh6r"]
+[ext_resource type="Texture2D" uid="uid://dpgae8ansem26" path="res://assets/button/pixil-frame-0_5.png" id="5_05oae"]
+[ext_resource type="AudioStream" uid="uid://cjaoomhllt1ik" path="res://assets/music/musique_menu.ogg" id="7_fecmd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_00g3u"]
+texture = ExtResource("1_f6r3o")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1nr11"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jy0mx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dtxjw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ijypc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v1wt2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yttms"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dqj87"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hjguh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lwu2f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xtic6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nv7bf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hahiq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_f1u2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mowbs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w07n7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8l3oh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1r1sj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ncfu1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yp24n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b3ldb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vydlx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_spn5q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_grj7c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pbyey"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w1js0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vcxjd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_wjh6r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_05oae")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ul6en")
+metadata/_edit_vertical_guides_ = [488.0, 1408.0]
+metadata/_edit_horizontal_guides_ = [872.0]
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.998
+offset_bottom = 2.15991
+theme_override_styles/panel = SubResource("StyleBoxTexture_00g3u")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 800.0
+offset_right = 720.0
+offset_bottom = 872.0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1nr11")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_jy0mx")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_dtxjw")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_ijypc")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_v1wt2")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_yttms")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_dqj87")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_hjguh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_lwu2f")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_xtic6")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_nv7bf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Button"]
+position = Vector2(272, 32)
+scale = Vector2(0.679074, 0.663802)
+sprite_frames = SubResource("SpriteFrames_hahiq")
+autoplay = "default"
+frame_progress = 0.500878
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1168.0
+offset_top = 792.0
+offset_right = 1696.0
+offset_bottom = 872.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_w07n7")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_8l3oh")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_1r1sj")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_ncfu1")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_yp24n")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_b3ldb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vydlx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_spn5q")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_grj7c")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pbyey")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_w1js0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Button2"]
+position = Vector2(240, 40)
+scale = Vector2(0.648283, 0.657292)
+sprite_frames = SubResource("SpriteFrames_vcxjd")
+autoplay = "default"
+frame_progress = 0.412989
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_fecmd")
+volume_db = -4.0
+autoplay = true
+max_distance = 9.22337e+18
+parameters/looping = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

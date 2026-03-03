@@ -1,0 +1,272 @@
+[gd_scene load_steps=42 format=3 uid="uid://cxd7gh8j2nuf3"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_84sm2"]
+[ext_resource type="FontFile" uid="uid://jnkyljs1dyri" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_3tgyj"]
+[ext_resource type="Texture2D" uid="uid://e5emtqd7jjrw" path="res://assets/background/menu.png" id="2_4l4qo"]
+[ext_resource type="Texture2D" uid="uid://dovswrjj0q3v3" path="res://assets/character/baleine_haut.png" id="3_xhexu"]
+[ext_resource type="Texture2D" uid="uid://dbadb7sxqamut" path="res://assets/character/baleine.png" id="4_jffoc"]
+[ext_resource type="Texture2D" uid="uid://bbdd3v73n6lhb" path="res://assets/character/baleine_bas.png" id="5_c3ftj"]
+[ext_resource type="Texture2D" uid="uid://dbprtcg6sp6hh" path="res://assets/character/le_gom_haut.png" id="6_oax0y"]
+[ext_resource type="Texture2D" uid="uid://ddxc8fjornyt8" path="res://assets/character/le_gom.png" id="7_055fe"]
+[ext_resource type="Texture2D" uid="uid://c2w4wiu5dn7u3" path="res://assets/character/le_gom_bas.png" id="8_g7pim"]
+[ext_resource type="Texture2D" uid="uid://bpkn7edkdljr5" path="res://assets/button/start-jaune.png" id="9_w1xyt"]
+[ext_resource type="Texture2D" uid="uid://bcam3c4jp7dmu" path="res://assets/button/start-rouge.png" id="10_g3fne"]
+[ext_resource type="Texture2D" uid="uid://b5fvr1duto1j6" path="res://assets/button/exit.png" id="11_pb2p8"]
+[ext_resource type="Texture2D" uid="uid://dv2b6qn5iqy8k" path="res://assets/button/highscores_jaune.png" id="11_wys7t"]
+[ext_resource type="Texture2D" uid="uid://cyhkv0j8m55vn" path="res://assets/button/highscores_rouge.png" id="12_fu8s0"]
+[ext_resource type="AudioStream" uid="uid://cjaoomhllt1ik" path="res://assets/music/musique_menu.ogg" id="16_83465"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1m2an"]
+texture = ExtResource("2_4l4qo")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cclqb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xhexu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jffoc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_c3ftj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m6wp7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_oax0y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_055fe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_g7pim")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtfx6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3tf34"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8emr6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iaitf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d83vv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rxlmd"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_w1xyt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_g3fne")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 3.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7t7im"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q6thh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hulsl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2bhne"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_spmxk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p0w2e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tod76"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5wciw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mua78"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fhhyk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmpww"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5kf6v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_wys7t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_fu8s0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uqkml"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_37dvb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w5eru"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0idtp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3i4yg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_pb2p8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_84sm2")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_1m2an")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel"]
+position = Vector2(338, 742)
+scale = Vector2(1.14, 1.14)
+sprite_frames = SubResource("SpriteFrames_cclqb")
+autoplay = "default"
+frame_progress = 0.96279
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Panel"]
+position = Vector2(1610, 742)
+scale = Vector2(1.08083, 1.08083)
+sprite_frames = SubResource("SpriteFrames_m6wp7")
+autoplay = "default"
+frame_progress = 0.644125
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -213.0
+offset_top = -28.0
+offset_right = 214.0
+offset_bottom = 306.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vtfx6")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_3tf34")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8emr6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_iaitf")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_d83vv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VBoxContainer/Button"]
+position = Vector2(194, 54)
+scale = Vector2(0.887471, 0.891667)
+sprite_frames = SubResource("SpriteFrames_rxlmd")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.610958
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7t7im")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_q6thh")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hulsl")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_2bhne")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_spmxk")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_p0w2e")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tod76")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_5wciw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_mua78")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_fhhyk")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lmpww")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VBoxContainer/Button3"]
+position = Vector2(194, 52)
+scale = Vector2(0.933333, 0.933333)
+sprite_frames = SubResource("SpriteFrames_5kf6v")
+autoplay = "default"
+frame_progress = 0.380518
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uqkml")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_37dvb")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_w5eru")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0idtp")
+text = "
+"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VBoxContainer/Button2"]
+position = Vector2(194, 51)
+scale = Vector2(0.917892, 0.891667)
+sprite_frames = SubResource("SpriteFrames_3i4yg")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -334.0
+offset_top = 132.0
+offset_right = 334.0
+offset_bottom = 337.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 10
+theme_override_fonts/font = ExtResource("2_3tgyj")
+theme_override_font_sizes/font_size = 105
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_83465")
+volume_db = -4.0
+autoplay = true
+max_distance = 9.22337e+18
+parameters/looping = true
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_highscores_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_exit_pressed"]

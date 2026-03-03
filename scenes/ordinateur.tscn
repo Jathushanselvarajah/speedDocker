@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://brorfloxjorq1"]
+
+[ext_resource type="Script" path="res://scripts/ordinateur.gd" id="1_8avgf"]
+[ext_resource type="Texture2D" uid="uid://4rhgemdvjkgw" path="res://assets/objects/pc.png" id="1_cufk7"]
+[ext_resource type="Texture2D" uid="uid://ctidlgg1vndq8" path="res://assets/objects/pc_bas.png" id="3_vrawv"]
+[ext_resource type="Texture2D" uid="uid://cyscnbepxing4" path="res://assets/objects/pc_haut.png" id="4_hhnoe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h0na5"]
+size = Vector2(30, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qgxox"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cufk7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vrawv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hhnoe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Ordinateur" type="Area2D" groups=["Computers", "Players"]]
+collision_layer = 6
+collision_mask = 6
+script = ExtResource("1_8avgf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_h0na5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qgxox")
+autoplay = "default"
+frame_progress = 0.881524
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

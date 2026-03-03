@@ -1,0 +1,254 @@
+[gd_scene load_steps=25 format=3 uid="uid://gvv3q0whg7mx"]
+
+[ext_resource type="Script" path="res://scripts/end_screen.gd" id="1_ikxok"]
+[ext_resource type="Texture2D" uid="uid://b1unplkthcqh3" path="res://assets/background/Fond.png" id="2_ap8ka"]
+[ext_resource type="FontFile" uid="uid://jnkyljs1dyri" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="4_5nsky"]
+[ext_resource type="Texture2D" uid="uid://fea37agk5g7u" path="res://assets/button/submit_jaune.png" id="4_vx8ns"]
+[ext_resource type="Texture2D" uid="uid://d20tksgiwnii1" path="res://assets/button/submit_rouge.png" id="5_h83sm"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7tkd0"]
+texture = ExtResource("2_ap8ka")
+modulate_color = Color(0.295866, 0.295867, 0.295866, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_1vlcc"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_e7153"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ia8bl"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_7ry81"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_qsx2s"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_dfc7n"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ts16x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qlm5i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yxmon"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oyro8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m02l4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_360kn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xwgji"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_421pf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o5fvy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lms5n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mj5mt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fm7uj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_vx8ns")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_h83sm")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 3.0
+}]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchor_right = 0.0942708
+anchor_bottom = 0.0555555
+offset_left = 848.0
+offset_top = 544.0
+offset_right = 881.0
+offset_bottom = 555.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_ikxok")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -4.536
+anchor_top = -7.183
+anchor_right = 6.066
+anchor_bottom = 10.683
+offset_left = 104.704
+offset_top = -46.0074
+offset_right = -206.124
+offset_bottom = -209.492
+theme_override_styles/panel = SubResource("StyleBoxTexture_7tkd0")
+metadata/_edit_lock_ = true
+
+[node name="Letter1" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = 14.0
+offset_right = 21.0
+offset_bottom = 307.0
+grow_vertical = 2
+
+[node name="UpButton" type="Button" parent="Letter1"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxLine_1vlcc")
+
+[node name="LetterLabel" type="Label" parent="Letter1"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_5nsky")
+theme_override_font_sizes/font_size = 80
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DownButton" type="Button" parent="Letter1"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxLine_e7153")
+
+[node name="Letter2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = 15.0
+offset_right = 23.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UpButton" type="Button" parent="Letter2"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxLine_ia8bl")
+
+[node name="LetterLabel" type="Label" parent="Letter2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_5nsky")
+theme_override_font_sizes/font_size = 80
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DownButton" type="Button" parent="Letter2"]
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxLine_7ry81")
+
+[node name="Letter3" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = 15.0
+offset_right = 26.0
+offset_bottom = 355.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="UpButton" type="Button" parent="Letter3"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxLine_qsx2s")
+
+[node name="LetterLabel" type="Label" parent="Letter3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_5nsky")
+theme_override_font_sizes/font_size = 80
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DownButton" type="Button" parent="Letter3"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxLine_dfc7n")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.984
+offset_left = -45.0
+offset_top = 200.0
+offset_right = -168.576
+offset_bottom = 270.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ts16x")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_qlm5i")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_yxmon")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_oyro8")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_m02l4")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_360kn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_xwgji")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_421pf")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_o5fvy")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_lms5n")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mj5mt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Button"]
+position = Vector2(151, 36)
+scale = Vector2(0.686198, 0.686198)
+sprite_frames = SubResource("SpriteFrames_fm7uj")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.392294
+
+[node name="MessageLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -88.0
+offset_top = -288.0
+offset_right = 310.0
+offset_bottom = -239.0
+theme_override_fonts/font = ExtResource("4_5nsky")
+theme_override_font_sizes/font_size = 30
+text = "You won with the score of : "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MessageLabel2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 62.0
+offset_top = -230.0
+offset_right = 138.0
+offset_bottom = -151.0
+theme_override_fonts/font = ExtResource("4_5nsky")
+theme_override_font_sizes/font_size = 65
+text = "98"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MessageLabel3" type="Label" parent="."]
+layout_mode = 0
+offset_left = -96.0
+offset_top = -143.0
+offset_right = 305.0
+offset_bottom = -31.0
+theme_override_fonts/font = ExtResource("4_5nsky")
+theme_override_font_sizes/font_size = 30
+text = "Please type your username
+ using your joystick"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Letter1/UpButton" to="." method="_on_Letter1_UpButton_pressed"]
+[connection signal="pressed" from="Letter1/DownButton" to="." method="_on_Letter1_DownButton_pressed"]
+[connection signal="pressed" from="Letter2/UpButton" to="." method="_on_Letter2_UpButton_pressed"]
+[connection signal="pressed" from="Letter2/DownButton" to="." method="_on_Letter2_DownButton_pressed"]
+[connection signal="pressed" from="Letter3/UpButton" to="." method="_on_Letter3_UpButton_pressed"]
+[connection signal="pressed" from="Letter3/DownButton" to="." method="_on_Letter3_DownButton_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_SubmitButton_pressed"]

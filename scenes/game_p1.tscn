@@ -1,0 +1,115 @@
+[gd_scene load_steps=19 format=3 uid="uid://lvfs7h1h2gy0"]
+
+[ext_resource type="Script" path="res://scripts/game_p1.gd" id="1_shi5w"]
+[ext_resource type="Script" path="res://scripts/GameTimer.gd" id="2_0srac"]
+[ext_resource type="FontFile" uid="uid://c6n8gvkljn7xg" path="res://assets/fonts/joystix monospace.otf" id="3_fkcpi"]
+[ext_resource type="AudioStream" uid="uid://inexxcr67h8a" path="res://assets/music/countdown.mp3" id="4_ojsif"]
+[ext_resource type="Texture2D" uid="uid://pv07knbjp8t2" path="res://assets/objects/panneau.png" id="5_oglvv"]
+[ext_resource type="PackedScene" uid="uid://cpo3kg8umovk" path="res://scenes/ground.tscn" id="6_lftxo"]
+[ext_resource type="Script" path="res://scripts/camera_p1_2d.gd" id="7_amjlq"]
+[ext_resource type="Texture2D" uid="uid://dcmoy6wf4jube" path="res://assets/background/dev_cours.png" id="8_je4ki"]
+[ext_resource type="PackedScene" uid="uid://b13jgyvnga521" path="res://scenes/player_1_p1.tscn" id="9_6wura"]
+[ext_resource type="PackedScene" uid="uid://by7gul6ie8xom" path="res://scenes/bg.tscn" id="11_1fjbe"]
+[ext_resource type="PackedScene" uid="uid://b413cepu1te4w" path="res://scenes/world_generator_p1.tscn" id="12_jwa1a"]
+[ext_resource type="PackedScene" uid="uid://4uxclc0pykel" path="res://scenes/spike_wall_p1.tscn" id="13_1d3e0"]
+[ext_resource type="PackedScene" uid="uid://cu0irkpsqvn3v" path="res://scenes/sections1/Section1.1.tscn" id="13_x3gbl"]
+[ext_resource type="PackedScene" uid="uid://h2vwvlpurfjp" path="res://scenes/sections1/Section3.1.tscn" id="14_b8at6"]
+[ext_resource type="PackedScene" uid="uid://dw6gc6rm8eqja" path="res://scenes/sections1/Section4.1.tscn" id="15_6syu5"]
+[ext_resource type="AudioStream" uid="uid://d0u7arpw607i8" path="res://assets/music/musique_jeu.ogg" id="15_tbagv"]
+[ext_resource type="PackedScene" uid="uid://dtri3o41ouf7k" path="res://scenes/sections1/Section9.1.tscn" id="16_7m307"]
+[ext_resource type="PackedScene" uid="uid://crq0641wqjg2w" path="res://scenes/sections1/Section8.1.tscn" id="16_r82wo"]
+
+[node name="Game" type="Node2D"]
+position = Vector2(-206, 0)
+script = ExtResource("1_shi5w")
+
+[node name="GameTimer" type="Node2D" parent="."]
+position = Vector2(363, 148)
+script = ExtResource("2_0srac")
+
+[node name="CountdownLabel" type="Label" parent="GameTimer"]
+offset_left = -161.0
+offset_top = -66.0
+offset_right = -109.0
+offset_bottom = -6.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_fkcpi")
+theme_override_font_sizes/font_size = 50
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountdownSound" type="AudioStreamPlayer2D" parent="GameTimer"]
+stream = ExtResource("4_ojsif")
+volume_db = 20.0
+autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameTimer"]
+
+[node name="Panneau" type="Sprite2D" parent="."]
+position = Vector2(343, 260)
+scale = Vector2(1.3125, 1.3125)
+texture = ExtResource("5_oglvv")
+
+[node name="Ground" parent="." instance=ExtResource("6_lftxo")]
+position = Vector2(-76, -277)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(252, 154)
+zoom = Vector2(3.5, 3.5)
+script = ExtResource("7_amjlq")
+
+[node name="Label" type="Label" parent="Camera2D"]
+offset_left = 174.0
+offset_top = -160.0
+offset_right = 261.0
+offset_bottom = -106.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_fkcpi")
+theme_override_font_sizes/font_size = 35
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
+visible = false
+position = Vector2(-1.00001, 1)
+scale = Vector2(0.820667, 0.820667)
+texture = ExtResource("8_je4ki")
+
+[node name="Player1" parent="." groups=["Players"] instance=ExtResource("9_6wura")]
+position = Vector2(253, 246)
+
+[node name="BG" parent="." instance=ExtResource("11_1fjbe")]
+scale = Vector2(2.25, 2.25)
+transform = Transform2D(2.25, 0, 0, 2.25, 0, 0)
+
+[node name="SpikeWall" parent="." instance=ExtResource("13_1d3e0")]
+position = Vector2(-31, 32)
+
+[node name="WorldGenerator" parent="." instance=ExtResource("12_jwa1a")]
+position = Vector2(1524, 280)
+sections_pool = Array[PackedScene]([ExtResource("13_x3gbl"), ExtResource("14_b8at6"), ExtResource("15_6syu5"), ExtResource("16_r82wo"), ExtResource("16_7m307")])
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_tbagv")
+volume_db = -4.0
+autoplay = true
+max_distance = 9.22337e+18
+parameters/looping = true
+
+[node name="CountdownLabel" type="Label" parent="."]
+offset_left = 438.0
+offset_top = 114.0
+offset_right = 629.0
+offset_bottom = 192.0
+
+[node name="CountdownTimer" type="Timer" parent="."]
+
+[connection signal="race_ready" from="GameTimer" to="." method="_on_game_timer_race_ready"]
+[connection signal="timeout" from="CountdownTimer" to="." method="_on_countdown_timer_timeout"]

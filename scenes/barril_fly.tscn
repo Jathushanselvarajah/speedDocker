@@ -1,0 +1,81 @@
+[gd_scene load_steps=14 format=3 uid="uid://w0b2q2fu0u5w"]
+
+[ext_resource type="Script" path="res://scripts/barril.gd" id="1_7b4s7"]
+[ext_resource type="Texture2D" uid="uid://qrvysnxrly3a" path="res://assets/objects/mine_bas.png" id="2_e1wej"]
+[ext_resource type="Texture2D" uid="uid://bnif34wnrd442" path="res://assets/sprites/barril/explosion8.png" id="2_h5ibw"]
+[ext_resource type="Texture2D" uid="uid://bhyb6142sigg5" path="res://assets/sprites/barril/explosion1.png" id="3_lhfaj"]
+[ext_resource type="Texture2D" uid="uid://cvqimwsp8570i" path="res://assets/objects/mine_haut.png" id="3_mslw4"]
+[ext_resource type="Texture2D" uid="uid://dypwvje722frb" path="res://assets/sprites/barril/explosion2.png" id="4_urcnq"]
+[ext_resource type="Texture2D" uid="uid://utr36dlfu2uy" path="res://assets/sprites/barril/explosion3.png" id="5_g5vqv"]
+[ext_resource type="Texture2D" uid="uid://cfk7sg7v50d53" path="res://assets/sprites/barril/explosion4.png" id="6_r6val"]
+[ext_resource type="Texture2D" uid="uid://uvpltwauqts6" path="res://assets/sprites/barril/explosion5.png" id="7_t08px"]
+[ext_resource type="Texture2D" uid="uid://303ucnonc6yv" path="res://assets/sprites/barril/explosion6.png" id="8_ug66r"]
+[ext_resource type="Texture2D" uid="uid://dwy6v58rbuhis" path="res://assets/sprites/barril/explosion7.png" id="9_malvj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pdo12"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_e1wej")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mslw4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_h5ibw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_lhfaj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_urcnq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_g5vqv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_r6val")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_t08px")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ug66r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_malvj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_h5ibw")
+}],
+"loop": false,
+"name": &"destruction",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epqgj"]
+size = Vector2(32, 31)
+
+[node name="BarrilFly" type="Area2D" groups=["Barrels", "Players"]]
+scale = Vector2(0.811965, 0.811965)
+collision_layer = 6
+collision_mask = 6
+script = ExtResource("1_7b4s7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pdo12")
+autoplay = "default"
+frame_progress = 0.484969
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 6
+visibility_layer = 6
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_epqgj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
