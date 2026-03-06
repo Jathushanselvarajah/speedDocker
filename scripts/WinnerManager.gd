@@ -8,7 +8,6 @@ var player2_is_winner: bool = false
 func set_winner(player1: bool, player2: bool) -> void:
 	player1_is_winner = player1
 	player2_is_winner = player2
-	print("Gagnant mis à jour dans WinnerManager : Player1 =", player1_is_winner, ", Player2 =", player2_is_winner)
 
 # Fonction pour vérifier si Player1 a gagné
 func is_player1_winner() -> bool:

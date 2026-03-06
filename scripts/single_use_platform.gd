@@ -14,7 +14,6 @@ func _process(_delta):
 func _on_area_2d_body_entered(body):
 	# Vérifiez si le corps appartient au groupe "Players"
 	if body.is_in_group("Players"):
-		print("Body entered: ", body.name)  # Pour voir quel corps entre
 		set_process(true)
 		$Timer.start(1)  # Démarre le timer après que le joueur entre dans la zone
 

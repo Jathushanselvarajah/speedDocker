@@ -26,15 +26,14 @@ func _process(delta: float) -> void:
 		
 
 func _on_inactivity_timeout() -> void:
-	print("Temps écoulé, retour au menu principal.")
-	JavaScriptBridge.eval("window.location.href='http://localhost:3000';")
+	get_tree().quit()
 
 
 func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/gamemode.tscn")
 
 func _on_exit_pressed() -> void:
-	JavaScriptBridge.eval("window.location.href='http://localhost:3000';")
+	get_tree().quit()
 
 func _on_highscores_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/HighScoresScene.tscn")

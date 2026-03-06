@@ -25,7 +25,6 @@ func _process(delta: float) -> void:
 		handle_stop_action()  # Appeler la méthode dédiée
 
 func _on_inactivity_timeout() -> void:
-	print("Temps écoulé, retour au menu principal.")
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _on_button_pressed() -> void:
@@ -35,9 +34,8 @@ func _on_button_2_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
 
 func handle_stop_action() -> void:
-	print("Action 'stop' détectée !")
 	# Arrêter la musique si elle est en cours de lecture
 	if background_music and background_music.playing:
 		background_music.stop()
 	# Revenir au menu principal
-	JavaScriptBridge.eval("window.location.href='http://localhost:3000';")
+	get_tree().quit()

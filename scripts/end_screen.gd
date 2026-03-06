@@ -31,7 +31,6 @@ func _ready() -> void:
 	add_child(http_request)
 	# Récupérer le score depuis ScoreManager lors du chargement de la scène
 	score = ScoreManager.get_final_score()
-	print("Score récupéré depuis ScoreManager : ", score)
 
 	# Récupérer le gagnant (player1 ou player2)
 	winner = "player1" if WinnerManager.is_player1_winner() else "player2"
@@ -57,13 +56,11 @@ func update_winner_display() -> void:
 
 
 func _on_inactivity_timeout() -> void:
-	print("Temps écoulé, retour au menu principal.")
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _process(delta: float) -> void:
 	# Détecter les inputs pour naviguer ou modifier les lettres en fonction du joueur gagnant
 	if winner == "player1":
-		print ("LE JOUEUR 1 OK ???? A GAGNER ET CELA SERA CES TOUCHES")
 		if Input.is_action_just_pressed("ui_start1"):
 			_on_SubmitButton_pressed()
 		elif Input.is_action_just_pressed("navigate_left1"):
@@ -78,7 +75,6 @@ func _process(delta: float) -> void:
 			handle_stop_action()  # Appeler une méthode dédiée pour "stop"
 	
 	elif winner == "player2":
-		print ("LE JOUEUR 2 A GAGNER ET CELA SERA CES TOUCHES")
 		if Input.is_action_just_pressed("ui_start2"):
 			_on_SubmitButton_pressed()
 		elif Input.is_action_just_pressed("navigate_left2"):
@@ -94,12 +90,11 @@ func _process(delta: float) -> void:
 
 
 func handle_stop_action() -> void:
-	print("Action 'stop' détectée !")
 	# Arrêter la musique si elle est en cours de lecture
 	if background_music and background_music.playing:
 		background_music.stop()
 	# Revenir au menu principal
-	JavaScriptBridge.eval("window.location.href='http://localhost:3000';")
+	get_tree().quit()
 
 
 
@@ -113,7 +108,7 @@ func update_letter_labels():
 			# Mettre en jaune la lettre sélectionnée, en blanc les autres
 			letter_labels[i].modulate = Color(1, 1, 0) if i == current_letter_index else Color(1, 1, 1)
 		else:
-			print("LetterLabel ", i + 1, " est manquant")
+			pass
 
 func increment_letter(index_lettre):
 	index_lettres[index_lettre] = (index_lettres[index_lettre] + 1) % lettres.length()
@@ -125,12 +120,10 @@ func decrement_letter(index_lettre):
 
 func navigate_to_next_letter():
 	current_letter_index = (current_letter_index + 1) % 3  # Cycle entre 0, 1 et 2
-	print("Lettre actuelle : ", current_letter_index)
 	update_letter_labels()
 
 func navigate_to_previous_letter():
 	current_letter_index = (current_letter_index - 1 + 3) % 3
-	print("Lettre actuelle : ", current_letter_index)
 	update_letter_labels()
 
 func get_pseudonym():
@@ -138,29 +131,26 @@ func get_pseudonym():
 
 func _on_SubmitButton_pressed() -> void:
 	player_name = get_pseudonym()  # Récupérer le pseudonyme à partir des lettres
-	print("Votre pseudonyme est : ", player_name)
 
 	if player_name.length() == 3:
 		send_score_to_api(player_name, score)
 	else:
-		print("Le pseudonyme doit être composé de trois lettres.")
+		pass
 
 func send_score_to_api(name: String, score: int) -> void:
-	var url = "http://localhost:3000/api/?game=SpeedDocker"
+	var url = "api/?game=SpeedDocker"
 	var data = {"name": name, "score": score}
 	var json_data = JSON.stringify(data)
 	http_request.connect("request_completed", Callable(self, "_on_request_completed"))
 	var headers = ["Content-Type: application/json"]
 	var error = http_request.request(url, headers, HTTPClient.METHOD_POST, json_data)
 	if error != OK:
-		print("Erreur lors de l'envoi de la requête : ", error)
+		pass
 
 func _on_request_completed(result: int, response_code: int, headers: Array, body: PackedByteArray) -> void:
 	var body_string = body.get_string_from_utf8()
 	if response_code == 200:
-		print("Score envoyé avec succès.")
 		# Revenir à l'écran d'accueil
 		get_tree().change_scene_to_file("res://scenes/HighScoresScene.tscn")
 	else:
-		print("Erreur lors de l'envoi du score : ", response_code)
-		print("Corps de la réponse : ", body_string)
+		pass

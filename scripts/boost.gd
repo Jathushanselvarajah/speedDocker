@@ -34,7 +34,6 @@ func _ready() -> void:
 func _on_body_entered(body: Node) -> void:
 	# Vérifier si le corps entrant est dans le groupe "Players" pour n'appliquer le boost qu'aux joueurs
 	if body.is_in_group("Players"):
-		print("Collision avec un joueur détectée : " + body.name)
 
 		# Si le joueur n'a pas déjà un boost actif, lui appliquer le boost
 		if boosted_player == null:
@@ -61,7 +60,6 @@ func apply_boost(player: Node) -> void:
 	boosted_player.SPEED += speed_increase
 	boost_time_left = boost_duration  # Définit la durée du boost
 	
-	print("%s a pris le Boost! Vitesse augmentée à %d" % [boosted_player.name, boosted_player.SPEED])
 
 	# Envoyer un signal indiquant qu'un joueur a pris un boost
 	emit_signal("boost_taken", boosted_player)
@@ -74,7 +72,6 @@ signal boost_ended(player)
 # Fonction appelée lorsque le timer expire
 func _on_boost_timeout() -> void:
 	# Afficher un message pour vérifier si cette fonction est appelée
-	print("Timer expiré, réinitialisation du boost pour : %s" % boosted_player.name)
 	
 	# Vérifie si un joueur a un boost actif
 	if boosted_player != null:
@@ -82,13 +79,11 @@ func _on_boost_timeout() -> void:
 		# Retirer l'augmentation de vitesse à la fin du boost
 		if boosted_player.has_meta("original_speed"):
 			var original_speed = boosted_player.get_meta("original_speed")
-			print("Rétablissement de la vitesse à %d" % original_speed)
 			boosted_player.SPEED = original_speed
 			boosted_player.remove_meta("original_speed")
 
 		# Retirer le statut de boosté
 		boosted_player.set_meta("is_boosted", false)
 		boosted_player = null
-		print("Boost terminé, vitesse réinitialisée.")
 	#SUPPRESION QUAND LE BOOST EST TERMINER A 100%
 	queue_free()
