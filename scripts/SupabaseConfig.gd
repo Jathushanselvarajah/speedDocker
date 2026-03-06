@@ -14,12 +14,14 @@ func get_headers() -> PackedStringArray:
 		"apikey: " + SUPABASE_KEY,
 		"Authorization: Bearer " + SUPABASE_KEY,
 		"Content-Type: application/json",
-		"Prefer: return=minimal"
+		"Prefer: return=minimal",
+		"Accept-Encoding: identity"
 	])
 
 # Headers pour les requêtes GET (pas besoin de Content-Type)
 func get_read_headers() -> PackedStringArray:
 	return PackedStringArray([
 		"apikey: " + SUPABASE_KEY,
-		"Authorization: Bearer " + SUPABASE_KEY
+		"Authorization: Bearer " + SUPABASE_KEY,
+		"Accept-Encoding: identity"
 	])
