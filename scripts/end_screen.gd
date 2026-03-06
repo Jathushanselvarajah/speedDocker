@@ -95,7 +95,7 @@ func handle_stop_action() -> void:
 	if background_music and background_music.playing:
 		background_music.stop()
 	# Revenir au menu principal
-	get_tree().quit()
+	JavaScriptBridge.eval("location.reload()")
 
 
 

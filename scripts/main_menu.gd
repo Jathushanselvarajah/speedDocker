@@ -26,14 +26,14 @@ func _process(delta: float) -> void:
 		
 
 func _on_inactivity_timeout() -> void:
-	get_tree().quit()
+	JavaScriptBridge.eval("location.reload()")
 
 
 func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/gamemode.tscn")
 
 func _on_exit_pressed() -> void:
-	get_tree().quit()
+	JavaScriptBridge.eval("location.reload()")
 
 func _on_highscores_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/HighScoresScene.tscn")
