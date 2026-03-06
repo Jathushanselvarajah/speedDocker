@@ -105,4 +105,4 @@ func _on_inactivity_timeout() -> void:
 # Réinitialise le timer d'inactivité lorsqu'une entrée utilisateur est détectée
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton or event is InputEventKey:
-		#inactivity_timer.start()  # Désactivé en Web
+		pass  # inactivity timer désactivé en Web
