@@ -14,6 +14,9 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+env:
+  GODOT_VERSION: "4.3"
+
 jobs:
   export:
     runs-on: ubuntu-latest
@@ -26,27 +29,17 @@ jobs:
 
       - name: Setup export templates
         run: |
-          # Find where templates are stored in this image
-          echo "Looking for export templates..."
-          find /root/.local -name "*.tpz" -o -name "web*" 2>/dev/null | head -20 || true
-          ls -la /root/.local/share/godot/ 2>/dev/null || true
-          ls -la /root/.local/share/godot/export_templates/ 2>/dev/null || true
-          ls -la /root/.local/share/godot/templates/ 2>/dev/null || true
-          # Ensure templates are in the expected location
-          TEMPLATE_DIR="/root/.local/share/godot/export_templates/4.3.stable"
-          if [ ! -d "$TEMPLATE_DIR" ]; then
-            mkdir -p "$TEMPLATE_DIR"
-            # Try to copy from alternative locations
-            if [ -d "/root/.local/share/godot/templates/4.3.stable" ]; then
-              cp -r /root/.local/share/godot/templates/4.3.stable/* "$TEMPLATE_DIR/" || true
-            fi
-          fi
-          echo "Template dir contents:"
-          ls -la "$TEMPLATE_DIR" 2>/dev/null || echo "Template dir is empty or missing"
+          TEMPLATES_DIR="$HOME/.local/share/godot/export_templates/4.3.stable"
+          mkdir -p "$TEMPLATES_DIR"
+          wget -q https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz -O /tmp/templates.tpz
+          unzip -o /tmp/templates.tpz -d /tmp/templates
+          mv /tmp/templates/templates/* "$TEMPLATES_DIR/"
+          rm -rf /tmp/templates /tmp/templates.tpz
+          echo "Templates installed:"
+          ls "$TEMPLATES_DIR" | grep web
 
       - name: Import project
-        run: |
-          godot --headless --import 2>&1 || true
+        run: godot --headless --import 2>&1 || true
 
       - name: Create build directory
         run: mkdir -p build/web
