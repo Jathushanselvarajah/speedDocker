@@ -26,6 +26,7 @@ ScoreManager="*res://scripts/ScoreManager.gd"
 WinnerManager="*res://scripts/WinnerManager.gd"
 GameState="*res://scripts/GameState.gd"
 GameTimer="*res://scripts/GameTimer.gd"
+SupabaseConfig="*res://scripts/SupabaseConfig.gd"
 
 [display]
 

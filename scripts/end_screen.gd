@@ -16,6 +16,7 @@ var index_lettres = [0, 0, 0]  # Indices pour les lettres de chaque `LetterLabel
 var current_letter_index: int = 0  # Lettre actuellement sélectionnée (0, 1 ou 2)
 
 var winner: String = ""  # Cette variable va contenir "player1" ou "player2" en fonction du gagnant
+var is_submitting: bool = false  # Empêcher les soumissions multiples
 
 # Ajouter une fonction qui définit qui a gagné en récupérant cette information depuis WinnerManager
 func _ready() -> void:
@@ -130,27 +131,31 @@ func get_pseudonym():
 	return lettres[index_lettres[0]] + lettres[index_lettres[1]] + lettres[index_lettres[2]]
 
 func _on_SubmitButton_pressed() -> void:
+	if is_submitting:
+		return  # Empêcher les double soumissions
 	player_name = get_pseudonym()  # Récupérer le pseudonyme à partir des lettres
 
 	if player_name.length() == 3:
+		is_submitting = true
 		send_score_to_api(player_name, score)
 	else:
 		pass
 
 func send_score_to_api(name: String, score: int) -> void:
-	var url = "api/?game=SpeedDocker"
+	var url = SupabaseConfig.get_highscores_url()
 	var data = {"name": name, "score": score}
 	var json_data = JSON.stringify(data)
 	http_request.connect("request_completed", Callable(self, "_on_request_completed"))
-	var headers = ["Content-Type: application/json"]
+	var headers = SupabaseConfig.get_headers()
 	var error = http_request.request(url, headers, HTTPClient.METHOD_POST, json_data)
 	if error != OK:
-		pass
+		# En cas d'erreur, aller quand même vers les highscores
+		get_tree().change_scene_to_file("res://scenes/HighScoresScene.tscn")
 
 func _on_request_completed(result: int, response_code: int, headers: Array, body: PackedByteArray) -> void:
-	var body_string = body.get_string_from_utf8()
-	if response_code == 200:
-		# Revenir à l'écran d'accueil
+	# Supabase retourne 201 pour un INSERT réussi
+	if response_code == 201 or response_code == 200:
 		get_tree().change_scene_to_file("res://scenes/HighScoresScene.tscn")
 	else:
-		pass
+		# Même en cas d'erreur, ne pas bloquer — aller vers les highscores
+		get_tree().change_scene_to_file("res://scenes/HighScoresScene.tscn")

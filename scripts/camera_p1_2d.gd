@@ -198,8 +198,8 @@ func end_game(winner: String) -> void:
 		# Envoie le score final à ScoreManager
 		ScoreManager.set_final_score(final_distance_km_int)
 
-		# Aller directement vers la scène de victoire (pas de backend pour les highscores)
-		change_scene_for_highscore(game_winner)
+		# Vérifier si c'est un nouveau highscore via Supabase
+		check_new_highscore(final_distance_km_int)
 
 		emit_signal("game_over", final_distance_km_int)
 
@@ -208,18 +208,18 @@ var current_new_score: int  # Variable de classe pour stocker le score
 
 func check_new_highscore(new_score: int) -> void:
 	current_new_score = new_score
-	var url = "info.json"
+	var url = SupabaseConfig.get_highscores_url() + "?select=score&order=score.desc&limit=11"
 	var http_request = HTTPRequest.new()
-	add_child(http_request)  # Ajouter le nœud HTTPRequest
+	add_child(http_request)
 
 	http_request.connect("request_completed", Callable(self, "_on_highscores_loaded"))
-	var error = http_request.request(url)
+	var error = http_request.request(url, SupabaseConfig.get_read_headers(), HTTPClient.METHOD_GET)
 
 	if error != OK:
-		pass
+		change_scene_for_highscore(game_winner)
 
 
-# Fonction appelée lors du chargement des scores
+# Fonction appelée lors du chargement des scores depuis Supabase
 func _on_highscores_loaded(result: int, response_code: int, headers: Array, body: PackedByteArray) -> void:
 	if response_code == 200:
 		var body_string = body.get_string_from_utf8()
@@ -227,39 +227,22 @@ func _on_highscores_loaded(result: int, response_code: int, headers: Array, body
 		var parse_result = json.parse(body_string)
 
 		if parse_result == OK:
-			var data = json.get_data()
-			if typeof(data) == TYPE_DICTIONARY and data.has("highscores"):
-				var highscores = data["highscores"]
-				
-				# Vérifier si le score actuel est le plus élevé des 11 premiers
-				var is_highest = true
-				for i in range(min(11, highscores.size())):
-					if current_new_score <= highscores[i]["score"]:
-						is_highest = false
-						break
-
-				# Si le score est dans les 11 premiers, l'ajouter
-				if is_highest:
+			var highscores = json.get_data()  # Supabase retourne directement un tableau
+			if highscores is Array:
+				if highscores.size() == 0:
 					change_scene_for_records(game_winner)
-				elif highscores.size() < 11:
+				elif current_new_score > highscores[0]["score"]:
+					change_scene_for_records(game_winner)
+				elif highscores.size() < 11 or current_new_score > highscores[highscores.size() - 1]["score"]:
 					change_scene_for_highscore(game_winner)
 				else:
-					# Comparer le score actuel avec le plus faible des 11 meilleurs
-					var lowest_score = highscores[0]["score"]
-					for i in range(1, min(11, highscores.size())):
-						if highscores[i]["score"] < lowest_score:
-							lowest_score = highscores[i]["score"]
-
-					if current_new_score > lowest_score:
-						change_scene_for_highscore(game_winner)
-					else:
-						change_scene_for_low_score(game_winner)
+					change_scene_for_low_score(game_winner)
 			else:
-				change_scene_for_low_score(game_winner)
+				change_scene_for_highscore(game_winner)
 		else:
-			change_scene_for_low_score(game_winner)
+			change_scene_for_highscore(game_winner)
 	else:
-		change_scene_for_low_score(game_winner)
+		change_scene_for_highscore(game_winner)
 
 # Fonction pour changer la scène en fonction du gagnant (pour les scores éligibles)
 func change_scene_for_records(winner: String) -> void:

@@ -30,13 +30,15 @@ func _ready() -> void:
 		add_child(inactivity_timer)
 	inactivity_timer.start()
 
-# Récupère les scores depuis l'API
+# Récupère les scores depuis Supabase
 func fetch_scores_from_api() -> void:
-	var url = "api/?game=SpeedDocker"
+	var url = SupabaseConfig.get_highscores_url() + "?select=name,score&order=score.desc&limit=11"
+	var headers = SupabaseConfig.get_read_headers()
 	http_request.connect("request_completed", Callable(self, "_on_scores_request_completed"))
-	var error = http_request.request(url, [], HTTPClient.METHOD_GET)
+	var error = http_request.request(url, headers, HTTPClient.METHOD_GET)
 	if error != OK:
-		pass
+		best_score_label.text = "Could not load scores."
+		top_scores_label.text = ""
 
 # Gestion de la réponse HTTP
 func _on_scores_request_completed(result: int, response_code: int, headers: Array, body: PackedByteArray) -> void:
@@ -48,25 +50,25 @@ func _on_scores_request_completed(result: int, response_code: int, headers: Arra
 		var parse_result = json_instance.parse(body_string)
 
 		if parse_result == OK:
-			var scores_data = json_instance.get_data()["highscores"]
+			var scores_data = json_instance.get_data()
+			# Supabase retourne directement un tableau (pas {"highscores": [...]})
 
 			# Affiche les scores si récupérés correctement
-			if scores_data.size() > 0:
-				scores_data.sort_custom(sort_scores_descending)  # Tri décroissant
-				var best_score = scores_data[0]  # Meilleur score
-				var top_scores = scores_data.slice(1, 11)  # Top 10 scores
+			if scores_data is Array and scores_data.size() > 0:
+				var best_score = scores_data[0]  # Meilleur score (déjà trié par Supabase)
+				var top_scores = scores_data.slice(1, 11)  # Top 10 suivants
 
 				# Met à jour les affichages
 				update_best_score_display(best_score)
 				update_top_scores_display(top_scores)
 			else:
-				best_score_label.text = "No high scores available."
-				top_scores_label.text = ""
+				best_score_label.text = "No high scores yet!"
+				top_scores_label.text = "Play to set the first record!"
 		else:
 			best_score_label.text = "Erreur lors du parsing des scores."
 			top_scores_label.text = ""
 	else:
-		best_score_label.text = "Erreur de récupération des scores."
+		best_score_label.text = "Could not load scores."
 		top_scores_label.text = ""
 
 # Met à jour l'affichage du meilleur score
