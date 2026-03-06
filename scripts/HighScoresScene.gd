@@ -28,7 +28,7 @@ func _ready() -> void:
 		inactivity_timer.one_shot = true
 		inactivity_timer.connect("timeout", Callable(self, "_on_inactivity_timeout"))
 		add_child(inactivity_timer)
-	inactivity_timer.start()
+	#inactivity_timer.start()  # Désactivé en Web
 
 # Récupère les scores depuis Supabase
 func fetch_scores_from_api() -> void:
@@ -105,4 +105,4 @@ func _on_inactivity_timeout() -> void:
 # Réinitialise le timer d'inactivité lorsqu'une entrée utilisateur est détectée
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton or event is InputEventKey:
-		inactivity_timer.start()
+		#inactivity_timer.start()  # Désactivé en Web

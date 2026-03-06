@@ -9,7 +9,7 @@ func _ready() -> void:
 	inactivity_timer.one_shot = true  # Assure que le timer ne se répète pas
 	inactivity_timer.connect("timeout", Callable(self, "_on_inactivity_timeout"))
 	add_child(inactivity_timer)  # Ajoute le timer à la scène
-	inactivity_timer.start()
+	#inactivity_timer.start()  # Désactivé en Web
 	
 	if background_music:
 		background_music.play()  # Lancer la musique

@@ -95,7 +95,7 @@ func handle_stop_action() -> void:
 	if background_music and background_music.playing:
 		background_music.stop()
 	# Revenir au menu principal
-	JavaScriptBridge.eval("location.reload()")
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 
 
