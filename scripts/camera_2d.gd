@@ -227,10 +227,10 @@ func end_game(winner: String) -> void:
 		# Envoie le score final à ScoreManager
 		ScoreManager.set_final_score(final_distance_km_int)
 
-		# Appeler directement check_new_highscore pour vérifier le record
-		check_new_highscore(final_distance_km_int)
+		# Aller directement vers la scène de victoire (pas de backend pour les highscores)
+		change_scene_for_highscore(game_winner)
 
-		emit_signal("game_over", final_distance_km_int)  # Émettre le signal avec le score final en km (entier)
+		emit_signal("game_over", final_distance_km_int)
 
 var current_new_score: int  # Variable de classe pour stocker le score
 
