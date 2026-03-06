@@ -22,13 +22,11 @@ var was_on_floor = false  # Suivi de l'état précédent du joueur (au sol ou en
 func _on_boost_taken(player: Node) -> void:
 	# Vérifier si le joueur boosté est ce joueur
 	if player == self:
-		print("Boost activé pour le joueur :", self.name)
 		$SmokeEffect/SmokeSprite.play("run_boost")
 		item_sound.play()  # Jouer le son de l'item
 
 func _on_boost_ended(player: Node) -> void:
 	if player == self:
-		print("Boost terminé pour :", self.name)
 		$SmokeEffect/SmokeSprite.stop()
 		$SmokeEffect/SmokeSprite.frame = 0  # Réinitialiser l'animation
 
@@ -63,7 +61,6 @@ func _on_barrel_touched(player: Node) -> void:
 		boom_sound.play() 
 		is_frozen = true  # Bloque les mouvements
 		animated_sprite_2d.animation = "dead"  # Joue l'animation de mort
-		print("Le joueur", name, "a été touché par un baril et est mort.")
 
 func _ready() -> void:
 	add_to_group("Players")
@@ -75,7 +72,6 @@ func _ready() -> void:
 	game_timer.connect("race_ready", Callable(self, "_on_race_ready"))  # Connexion correcte du signal
 
 func _on_race_ready() -> void:
-	print("La course peut commencer pour player_1 !")
 	# La course est prête, donc le joueur peut commencer
 	set_process(true)  # Reprend le traitement du joueur (si nécessaire)
 
@@ -123,8 +119,7 @@ func _physics_process(delta: float) -> void:
 	# Obtenir la direction d'entrée et gérer le mouvement/décélération.
 	var direction := Input.get_axis("player1_left", "player1_right")
 	if Input.is_action_just_pressed("stop"):
-		print("Le jeu c'est arrêter")
-		JavaScriptBridge.eval("window.location.href='http://localhost:3000'")
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 	if direction:
 		velocity.x = direction * SPEED
 	else:
@@ -147,11 +142,9 @@ func play_deadline_animation() -> void:
 	# Activer l'animation "deadline" et bloquer les mouvements
 	is_frozen = true
 	animated_sprite_2d.animation = "deadline"
-	print("Animation 'deadline' activée pour", name)
 
 func play_explosionsol_animation() -> void:
 	boom_sound.play()  # Jouer le son de l'item
 	# Activer l'animation "deadline" et bloquer les mouvements
 	is_frozen = true
 	animated_sprite_2d.animation = "explosionsol"
-	print("Animation 'deadline' activée pour", name)

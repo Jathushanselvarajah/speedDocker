@@ -20,7 +20,6 @@ var http_request: HTTPRequest = null
 func _ready() -> void:
 	game_timer.connect("race_ready", Callable(self, "_on_race_start"))
 	game_timer.start_timer()  # Démarrer le timer
-	print("Le script principal est prêt.")  # Ajoute ceci
 	set_process(true)
 	player_1_inactivity_timer = 0.0
 	
@@ -36,7 +35,6 @@ func _ready() -> void:
 	add_child(http_request)  # Ajoute le node à la scène
 
 func _on_race_start():
-	print("La course commence !")
 	# Tout le traitement nécessaire pour démarrer la course
 	# Cela pourrait inclure l'activation du mouvement des joueurs, des obstacles, etc.
 	set_process(true)  # Reprendre le traitement des fonctionnalités (optionnel si déjà actif)
@@ -51,8 +49,7 @@ func _process(delta: float) -> void:
 	
 	# Si les deux joueurs sont inactifs pendant la durée limite, arrêter le jeu
 	if player_1_inactivity_timer >= inactivity_duration:
-		print("Les deux joueurs sont inactifs, arrêt du jeu.")
-		JavaScriptBridge.eval("window.location.href='http://localhost:3000'")
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 	# Obtenir les positions X des deux joueurs
 	var player_1_x = player_1.position.x
@@ -77,12 +74,12 @@ func _process(delta: float) -> void:
 
 	# Vérifier si Player1 sort des limites de la caméra
 	if player_1.position.x < camera_left_limit or player_1.position.x > camera_right_limit:
-		print("Le joueur numéro 1 a perdu")
+		pass
 
 
 	# --- Vérification des joueurs franchissant la limite de sol ---
 	if player_1.position.y > ground_limit_y:
-		print("Le joueur numéro 1 est tombé dans le vide")
+		pass
 
 
 
@@ -90,7 +87,6 @@ func _process(delta: float) -> void:
 func end_game(score: int) -> void:
 	final_score = score
 	ScoreManager.set_final_score(final_score)
-	print("GOOD SCORE LOAD:", final_score)  # Vérifie que le score est envoyé au ScoreManager
 	ScoreManager.check_new_highscore(final_score)
 	
 # Fonction appelée pour réinitialiser le timer d'inactivité du joueur 1

@@ -23,7 +23,6 @@ func _ready():
 
 
 func _on_race_ready() -> void:
-	print("La course peut commencer pour le mur !")
 	# La course est prête, donc le joueur peut commencer
 	set_process(true)  # Reprend le traitement du joueur (si nécessaire)
 
@@ -36,7 +35,6 @@ func _process(delta):
 		return  # Ne pas bouger le mur tant que la course n'a pas commencé
 	if move_wall:
 		position.x += base_speed * delta
-		print("Mur en mouvement.")  # Pour vérifier que le mur se déplace
 
 	var player1_distance = player1.position.x / pixels_per_km
 	var max_distance_km = player1_distance
@@ -48,4 +46,3 @@ func _on_body_entered(body):
 		if body.has_node("AnimatedSprite2D"):
 			boom_sound.play()  # Jouer le son de l'item
 			body.get_node("AnimatedSprite2D").play("deadline")
-		print(body.name, " a été touché par le mur de piques.")

@@ -32,11 +32,11 @@ func _ready() -> void:
 
 # Récupère les scores depuis l'API
 func fetch_scores_from_api() -> void:
-	var url = "http://localhost:3000/api/?game=SpeedDocker"
+	var url = "api/?game=SpeedDocker"
 	http_request.connect("request_completed", Callable(self, "_on_scores_request_completed"))
 	var error = http_request.request(url, [], HTTPClient.METHOD_GET)
 	if error != OK:
-		print("Erreur lors de la récupération des scores : ", error)
+		pass
 
 # Gestion de la réponse HTTP
 func _on_scores_request_completed(result: int, response_code: int, headers: Array, body: PackedByteArray) -> void:
@@ -63,11 +63,9 @@ func _on_scores_request_completed(result: int, response_code: int, headers: Arra
 				best_score_label.text = "No high scores available."
 				top_scores_label.text = ""
 		else:
-			print("Erreur lors du parsing JSON : ", parse_result)
 			best_score_label.text = "Erreur lors du parsing des scores."
 			top_scores_label.text = ""
 	else:
-		print("Erreur de requête HTTP, code de réponse : ", response_code)
 		best_score_label.text = "Erreur de récupération des scores."
 		top_scores_label.text = ""
 
@@ -96,11 +94,10 @@ func _on_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 	
 func _on_exit_pressed() -> void:
-	JavaScriptBridge.eval("window.location.href='http://localhost:3000';")
+	get_tree().quit()
 
 # Appelée lorsque le timer d'inactivité expire
 func _on_inactivity_timeout() -> void:
-	print("Inactivité détectée, retour au menu principal.")
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 # Réinitialise le timer d'inactivité lorsqu'une entrée utilisateur est détectée

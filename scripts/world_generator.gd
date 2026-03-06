@@ -29,11 +29,9 @@ func generate_world() -> void:
 		if add_special:
 			add_special_section()
 			normal_section_count = 0  # Réinitialiser le compteur après une section spéciale
-			print("Ajout d'une section spéciale")  # Afficher un message de débogage pour la section spéciale
 		else:
 			add_normal_section()
 			normal_section_count += 1  # Incrémenter le compteur pour chaque section normale
-			print("Ajout d'une section normale")  # Afficher un message de débogage pour la section normale
 
 		# Met à jour current_x_position pour placer la prochaine section à la fin de celle-ci
 		current_x_position += section_width
