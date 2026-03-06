@@ -66,10 +66,10 @@ func _on_scores_request_completed(result: int, response_code: int, headers: Arra
 				best_score_label.text = "No high scores yet!"
 				top_scores_label.text = "Play to set the first record!"
 		else:
-			best_score_label.text = "Debug: " + body_string.left(100)
+			best_score_label.text = "Could not parse scores."
 			top_scores_label.text = ""
 	else:
-		best_score_label.text = "HTTP " + str(response_code)
+		best_score_label.text = "Could not load scores."
 		top_scores_label.text = ""
 
 # Met à jour l'affichage du meilleur score

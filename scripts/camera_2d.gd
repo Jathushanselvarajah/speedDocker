@@ -239,6 +239,7 @@ func check_new_highscore(new_score: int) -> void:
 	current_new_score = new_score
 	var url = SupabaseConfig.get_highscores_url() + "?select=score&order=score.desc&limit=11"
 	var http_request = HTTPRequest.new()
+	http_request.accept_gzip = false
 	add_child(http_request)
 
 	http_request.connect("request_completed", Callable(self, "_on_highscores_loaded"))
