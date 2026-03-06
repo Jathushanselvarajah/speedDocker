@@ -26,8 +26,27 @@ jobs:
 
       - name: Setup export templates
         run: |
-          mkdir -p /root/.local/share/godot/export_templates/4.3.stable
-          mv /root/.local/share/godot/templates/4.3.stable/* /root/.local/share/godot/export_templates/4.3.stable/
+          # Find where templates are stored in this image
+          echo "Looking for export templates..."
+          find /root/.local -name "*.tpz" -o -name "web*" 2>/dev/null | head -20 || true
+          ls -la /root/.local/share/godot/ 2>/dev/null || true
+          ls -la /root/.local/share/godot/export_templates/ 2>/dev/null || true
+          ls -la /root/.local/share/godot/templates/ 2>/dev/null || true
+          # Ensure templates are in the expected location
+          TEMPLATE_DIR="/root/.local/share/godot/export_templates/4.3.stable"
+          if [ ! -d "$TEMPLATE_DIR" ]; then
+            mkdir -p "$TEMPLATE_DIR"
+            # Try to copy from alternative locations
+            if [ -d "/root/.local/share/godot/templates/4.3.stable" ]; then
+              cp -r /root/.local/share/godot/templates/4.3.stable/* "$TEMPLATE_DIR/" || true
+            fi
+          fi
+          echo "Template dir contents:"
+          ls -la "$TEMPLATE_DIR" 2>/dev/null || echo "Template dir is empty or missing"
+
+      - name: Import project
+        run: |
+          godot --headless --import 2>&1 || true
 
       - name: Create build directory
         run: mkdir -p build/web
